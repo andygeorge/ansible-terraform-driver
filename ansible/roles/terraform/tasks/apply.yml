@@ -1,0 +1,22 @@
+---
+# TODO: delete this workaround for the following issue, after issue is fixed
+# https://github.com/hashicorp/terraform/issues/21830
+#
+# tl;dr this issue cascades to https://github.com/ansible/ansible/issues/59089,
+# which prevents us from using the terraform module unless we hack our
+# workspace config (https://github.com/ansible/ansible/issues/59089#issuecomment-551587051)
+# ...and run the following 'workspace select' before each 'apply':
+- name: Select Terraform workspace
+  command: "terraform workspace select {{ terraform_workspace | regex_replace('myproject-') }}"
+  args:
+    chdir: "{{ terraform_project_path }}"
+
+- name: "Make sure Terraform resources for {{ target_module }} are {{ terraform_apply_state | default('present') }}"
+  terraform:
+    targets:
+      - "{{ target_module }}"
+    project_path: "{{ terraform_deployments_path }}/{{  }}"
+    workspace: "{{ terraform_workspace }}"
+    state: "{{ terraform_apply_state | default('present') }}"
+    variables:
+      instance_ami: "{{ instance_ami }}"

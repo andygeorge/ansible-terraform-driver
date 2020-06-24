@@ -1,0 +1,4 @@
+---
+environment: "production"
+terraform_workspace: "myproject-{{ environment }}"
+instance_ami: "prod-ami"
