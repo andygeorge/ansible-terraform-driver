@@ -19,4 +19,5 @@
     workspace: "{{ terraform_workspace }}"
     state: "{{ terraform_apply_state | default('present') }}"
     variables:
+      instance_name: "{{ instance_name }}"
       instance_ami: "{{ instance_ami }}"

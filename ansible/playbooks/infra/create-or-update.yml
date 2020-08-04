@@ -5,10 +5,10 @@
   gather_facts: false
 
   tasks:
-  - name: Run terraform apply
+  - name: Create AWS VM
     include_role:
       name: terraform
       tasks_from: apply
     vars:
       terraform_apply_state: "present"
-      target_module: "aws-vm-{{ environment }}"
+      target_module: "aws-vm"

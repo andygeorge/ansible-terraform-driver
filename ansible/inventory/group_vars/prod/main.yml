@@ -1,4 +1,5 @@
 ---
 environment: "production"
 terraform_workspace: "myproject-{{ environment }}"
+instance_name: "my-prod-box"
 instance_ami: "prod-ami"
